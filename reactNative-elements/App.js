@@ -1,59 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import { FlatList, SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
-// import { TouchableOpacity } from 'react-native-gesture-handler';
+import HomeScreen from "./components/HomeScreen.js";
 import Calendar from "./components/Calendar/Calendar.js";
+import {NavigationContainer} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const SCREEN_WIDTH = Dimensions.get("window").width;
+const Stack = createNativeStackNavigator();
+
 export default function App() {
 
-  const components = [
-    {
-      id: 'Calendar',
-      component: <Calendar/>
-    },
-    {
-      id: 'Cards',
-      component: <Calendar/>
-    },
-    { 
-      id: 'extra',
-      component: <Calendar/>
-    }
-  ]
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={components}
-        contentContainerStyle={{width: '100%', borderBottomWidth: 1}}
-        renderItem={({item})=> {
-          return(
-            <TouchableOpacity style={styles.itemContainer}>
-              <Text>{item.id}</Text>
-            </TouchableOpacity>
-            )
-        }}
-        keyExtractor={item=>item.id}
-        >
-      </FlatList>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'React Native Components'}}
+          />
+          <Stack.Screen name="Calendar" component={Calendar}/>
+      </Stack.Navigator>
+      
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'flex-start',
-    alignSelf: 'center',
-    justifyContent: 'center',
-    margin: 50,
-    width: '100%',
-    backgroundColor: 'red'
-  },
-  itemContainer : {
-    padding: 15,
-    borderTopWidth: 1,
-    width: SCREEN_WIDTH
-  }
-});
