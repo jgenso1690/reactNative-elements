@@ -28,13 +28,13 @@ const Calendar = () => {
   const [ dateList, setDateList ] = useState(getListDate())
 
   return (
-    <View style={{ flex:1 }}>
+    <View style={{ }}>
+      
       <FlatList
       horizontal={true}
       data={dateList}
-      style={{backgroundColor: 'red'}}
+      style={{margin: 20, alignSelf: 'flex-start',borderWidth: 0.5, }}
       renderItem={({item}) => {
-        console.log('i', item.date.slice(8))
         return(
           <Day
             date={item.date}
