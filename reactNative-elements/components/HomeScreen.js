@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { FlatList, SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 import Calendar from "./Calendar/Calendar.js";
+import Cards from "./Cards/CardsContainer.js";
 import {NavigationContainer} from '@react-navigation/native';
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -11,20 +12,17 @@ const HomeScreen = ({navigation}) => {
     const components = [
       {
         id: 'Calendar',
-        component: <Calendar/>
       },
       {
         id: 'Cards',
-        component: <Calendar/>
       },
-      { 
-        id: 'extra',
-        component: <Calendar/>
-      }
+      // { 
+      //   id: 'extra',
+      // }
     ]
 
-    const handlePress = () => {
-      navigation.navigate('Calendar', {name: 'Calendar'})
+    const handlePress = (item) => {
+      navigation.navigate(item)
     }
 
     return (
@@ -34,7 +32,7 @@ const HomeScreen = ({navigation}) => {
             contentContainerStyle={{width: '100%', borderBottomWidth: 1}}
             renderItem={({item})=> {
               return(
-                <TouchableOpacity onPress={handlePress} style={styles.itemContainer}>
+                <TouchableOpacity onPress={()=>handlePress(item.id)} style={styles.itemContainer}>
                   <Text>{item.id}</Text>
                 </TouchableOpacity>
                 )
