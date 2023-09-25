@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { View, Text, FlatList} from "react-native";
+import { View, Text, FlatList } from "react-native";
 // import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import Day from "./Day";
 import moment, {duration, subtract} from "moment";
