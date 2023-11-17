@@ -1,55 +1,61 @@
-import React, {useState, useRef} from "react";
-import { View, Text, FlatList, PanResponder, TouchableOpacity } from "react-native";
+import React from "react";
+import { View, Text, SafeAreaView, ScrollView, Dimensions } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
+import Card from "./CardComponent";
+import Card1 from "../../assets/Vectorcard1.js";
+import Card2 from "../../assets/Vectorcard2.js";
+import Card3 from "../../assets/Vectorcard3.js";
+import Vectorcard1 from "../../assets/Vectorcard1.js";
+
+const WIDTH = Dimensions.get('window').width;
 
 const CardsContainer = () => {
 
-    const cards = ['card3', 'card2', 'card1'];
 
-    const getCard = (i, text) =>{
-
-        const [ panX, setPanX] = useState(new Animated.Value(0));
-
-        const panResponder = useRef(
-            PanResponder.create({
-                onStartShouldSetPanResponder: () => false,
-                onMoveShouldSetPanResponder: () => true,
-                onPanResponderMove: (event, gesture) => {
-                    setPanX(gesture.dx)
-                },
-                onPanResponderRelease: () =>{
-                    
-                }
-            })
-            ).current
-            
-        return(
-            <Animated.View
-                {...panResponder.panHandlers}
-                ref={panResponder}
-                key={i}
-                style={{
-                    transform: [{translateX: panX},{translateY: 1+(i*5)}],
-                    backgroundColor: i==0? 'blue' : i == 1 ? 'red' : 'yellow',
-                    width: 200, height: 100, borderWidth: 1, justifyContent: 'center', alignItems: 'center', position: 'absolute', top: 30}}>
-                    <Text>
-                        Card {text}
-                    </Text>
-            </Animated.View>
-                        
-                
-            )
-    }
+    const cardsData = [
+         {
+            id: '0001',
+            img: <Card1/>,
+            }
+        , {
+            id: '0002',
+            img: <Card2/>,
+            }
+        , {
+            id: '0003',
+            img: <Card3/>,
+            }
+    ]
     
     return (
         <View style={{ justifyContent: 'center', alignItems: 'center',marginTop: 20}}>
-                {/* Card component */}
-                {cards.map((item, index) =>{
-                        return (
-                        getCard(index,item)
-                        )
-                    })
-                } 
+            <Text>
+                My Wallet
+            </Text>
+            <Animated.FlatList
+                style={{ flexDirection: 'row', margin: 10}}
+                contentContainerStyle={{}}
+                horizontal
+                keyExtractor={i=> i.id}
+                data={cardsData}
+
+                renderItem={(({item, index})=>{
+                    return(
+                        <View
+                        key={item.id}
+                        style={{ paddingHorizontal: 10, position:'relative',
+                        }}
+                        >
+                            <Card
+                            id={index}
+                            img={item.img}
+                            />
+                        </View>
+                    )}
+                )}
+                    
+            />
         </View>
     )
 
