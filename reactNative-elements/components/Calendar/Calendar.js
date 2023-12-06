@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, TouchableOpacity } from "react-native";
 // import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import Day from "./Day";
 import moment, {duration, subtract} from "moment";
@@ -35,6 +35,10 @@ const Calendar = () => {
 
   const [ currentDateList, setCurrentDateList ] = useState([]);
 
+  const goBack = () =>{ 
+    setSelectedDay(21)
+  }
+
   useEffect(()=>{
     if (currentDateList.length == 0 ) {
       setCurrentDateList(getListDate(selectedDay))
@@ -52,6 +56,9 @@ const Calendar = () => {
 
   return (
     <View style={{ }}>
+      <TouchableOpacity style={{alignSelf: 'flex-end', margin: 10}} onPress={goBack}>
+        <Text>Today</Text>
+      </TouchableOpacity>
       <FlatList
       ref={flatListRef}
       horizontal={true}
@@ -64,7 +71,6 @@ const Calendar = () => {
       style={{margin: 20, alignSelf: 'flex-start',borderWidth: 0.5, }}
       renderItem={({item, index}) => {
         if (index==selectedDay) flatListRef.current.scrollToIndex({index: selectedDay, animated: true, viewPosition: 0.5})
-
         return(
           <Day
           index={index}
