@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 // import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import Day from "./Day";
+import RemindersComponent from "./RemindersComponent";
 import moment, {duration, subtract} from "moment";
 
 const Calendar = () => {
@@ -55,7 +56,7 @@ const Calendar = () => {
 
 
   return (
-    <View style={{ }}>
+    <View style={{ margin: 20, }}>
       <TouchableOpacity style={{alignSelf: 'flex-end', margin: 10}} onPress={goBack}>
         <Text>Today</Text>
       </TouchableOpacity>
@@ -68,7 +69,7 @@ const Calendar = () => {
         setTimeout(()=>flatListRef.current.scrollToIndex({index:index, animated: true, viewPosition: 0.5}, 200))
         }
       }
-      style={{margin: 20, alignSelf: 'flex-start',borderWidth: 0.5, }}
+      style={{ alignSelf: 'flex-start',borderWidth: 0.5, }}
       renderItem={({item, index}) => {
         if (index==selectedDay) flatListRef.current.scrollToIndex({index: selectedDay, animated: true, viewPosition: 0.5})
         return(
@@ -83,6 +84,9 @@ const Calendar = () => {
         }}
       keyExtractor={item => item.id}
 
+      />
+      <RemindersComponent
+        selectedDay={currentDateList[selectedDay]}
       />
 
     </View>
