@@ -69,7 +69,7 @@ const Calendar = () => {
         setTimeout(()=>flatListRef.current.scrollToIndex({index:index, animated: true, viewPosition: 0.5}, 200))
         }
       }
-      style={{ alignSelf: 'flex-start',borderWidth: 0.5, }}
+      style={{ alignSelf: 'flex-start', borderWidth: 0.5, }}
       renderItem={({item, index}) => {
         if (index==selectedDay) flatListRef.current.scrollToIndex({index: selectedDay, animated: true, viewPosition: 0.5})
         return(

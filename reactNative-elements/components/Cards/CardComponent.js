@@ -28,7 +28,7 @@ const Card = (props) =>{
             ref={panResponder}
             style={{
                 // transform: [{translateX: panX},{translateY: 0}]
-                shadowOffset:{width:0, height:2}, shadowColor: 'black', elevation:5, shadowOpacity: 0.20, borderRadius: 10, 
+                shadowOffset:{width:0, height:2}, shadowColor: '#595c5b', elevation:5, shadowOpacity: 0.20, borderRadius: 10, 
                 justifyContent: 'center', alignItems: 'center',
             }}
                 >
